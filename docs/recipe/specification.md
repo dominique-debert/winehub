@@ -1,3 +1,5 @@
+# WineHub Recipe Specification
+
 # Table of Contents
 
 1. Abstract
@@ -14,8 +16,6 @@
 12. Examples
 13. Future Extensions
 14. Appendices
-
-# WineHub Recipe Specification
 
 | Property      | Value                        |
 | ------------- | ---------------------------- |
@@ -379,7 +379,7 @@ Recipes describe execution intent only.
 
 Every Recipe follows the same logical organization.
 
-```yaml
+```text
 Recipe
 │
 ├── Requirements
@@ -415,6 +415,8 @@ Regardless of the serialization format, both representations describe the exact 
 
 A Recipe document consists of a single root object.
 
+The root object MUST NOT contain duplicated properties.
+
 Example:
 
 ```yaml
@@ -443,7 +445,9 @@ The order of sections SHOULD follow the specification for readability.
 
 Parsers MUST NOT rely on field ordering.
 
-Unknown fields SHOULD be ignored unless strict validation mode is enabled.
+Unknown fields MUST trigger a warning.
+
+Strict validation MUST reject unknown fields.
 
 ---
 
@@ -921,18 +925,21 @@ verification:
 
 ## Example
 
-```yaml
 verification:
-  expectedResult: Main menu appears.
 
-    Save creation works.
+expectedResults:
 
-    No graphical corruption.
+    - Main menu appears
 
-  knownIssues: Intro video may stutter.
+    - Save creation works
 
-    Ray Tracing is unstable.
-```
+    - No graphical corruption
+
+knownIssues:
+
+    - Intro video may stutter
+
+    - Ray Tracing is unstable
 
 ---
 
@@ -965,7 +972,18 @@ launch:
   executable: Diablo IV.exe
 
 verification:
-  expectedResult: Main menu loads successfully.
+expectedResults:
+  - Main menu loads successfully
 
-    Campaign is playable.
+  - Campaign is playable
 ```
+
+# Design Notes
+
+The dependency model may evolve.
+
+The filesystem model may evolve.
+
+The registry abstraction may evolve.
+
+The specification intentionally leaves room for future refinements.
