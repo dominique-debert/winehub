@@ -1,21 +1,19 @@
 {
-  "name": "recipe",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "name": "@winehub/recipe",
+  "version": "0.0.1",
+  "private": true,
   "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "dependencies": {
-    "yaml": "^2.9.0",
-    "zod": "^4.4.3"
+    "yaml": "^2.8.0",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
-    "@types/node": "^24.13.2",
-    "typescript": "^6.0.3"
+    "@types/node": "^24.0.0",
+    "typescript": "^5.8.3"
   }
 }
