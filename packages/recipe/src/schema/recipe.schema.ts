@@ -1,20 +1,14 @@
 import { z } from "zod";
 
+import { RuntimeSchema } from "./runtime.schema";
+import { LaunchSchema } from "./launch.schema";
+
 export const RecipeSchema = z.object({
   schemaVersion: z.literal(1),
 
-  runtime: z.object({
-    provider: z.string().min(1),
-    version: z.string().min(1),
-  }),
+  runtime: RuntimeSchema,
 
-  launch: z.object({
-    executable: z.string().min(1),
-
-    arguments: z.array(z.string()).optional(),
-
-    workingDirectory: z.string().optional(),
-  }),
+  launch: LaunchSchema,
 });
 
 export type Recipe = z.infer<typeof RecipeSchema>;
